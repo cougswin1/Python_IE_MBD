@@ -6,7 +6,7 @@ Created on Wed Feb 15 11:23:42 2017
 @author: Maurice
 """
 
-import OOpStudentFile as st #student class file
+import Studentfile as st #student class file
 
 class StudentManager:
     def __init__(self,filename):

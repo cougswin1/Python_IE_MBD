@@ -6,7 +6,7 @@ Created on Wed Feb 15 11:40:50 2017
 @author: Maurice
 """
 
-import OOPSTController
+import Studentcontroller
 
 class view:
     

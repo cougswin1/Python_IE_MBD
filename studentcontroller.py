@@ -6,7 +6,7 @@ Created on Wed Feb 15 11:31:06 2017
 @author: Maurice
 """
 
-import OOpStudentManager as st
+import Studentmanager as st
 
 class controller:
     
