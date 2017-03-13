@@ -20,3 +20,6 @@ Assignemnt outline from Ignacio Larru.
 Why dont we push this program to a wix page and make it seem professional? it shouldnt be hard and give an athstetic value. 
 
 
+https://chaingo.slack.com/archives/web-development/p1467907319000078
+
+GIT Comands above
