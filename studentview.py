@@ -6,7 +6,7 @@ Created on Wed Feb 15 11:40:50 2017
 @author: Maurice
 """
 
-import Studentcontroller
+import Studentcontroller as st
 
 class view:
     
@@ -20,7 +20,7 @@ class view:
                   Welcome to student manager
                   
                   0-Quit
-                  1-Average frade for one student
+                  1-Average grade for one student
                   2-Average of the average grade of all students
                   3-Average grade for one course
                   """
@@ -28,4 +28,11 @@ class view:
             choice = input("Input command: ")
             print()
             
-            if choice == "0"
+            if choice == "0":
+                print("Bye bye!")
+                break
+            if choice == "1"
+                s = input("Who's grades do you want to know?")
+                print("Your Average Grade is")+st.averageStudent[s]
+            
+            
