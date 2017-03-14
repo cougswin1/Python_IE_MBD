@@ -1,0 +1,201 @@
+"""
+Created on Tue Mar 14 00:17:35 2017
+
+@author: jordansorensen
+"""
+
+from tkinter import Tk, Label, Button
+
+class MyFirstGUI:
+    def __init__(self, master):
+        self.master = master
+        master.title("A simple GUI")
+
+        self.label = Label(master, text="This is our first GUI!")
+        self.label.pack()
+
+        self.greet_button = Button(master, text="Greet", command=self.greet)
+        self.greet_button.pack()
+
+        self.close_button = Button(master, text="Close", command=master.quit)
+        self.close_button.pack()
+
+    def greet(self):
+        print("Greetings!")
+
+root = Tk()
+my_gui = MyFirstGUI(root)
+root.mainloop()
+
+-------------------------------------------------------------------------------
+import Studentfile as st #student class file
+
+
+class StudentManager:
+    def __init__(self,filename):
+        self.filename = filename
+        self.students = {}
+
+    def loadStudent(self,idIE,student):
+        self.students[idIE]= student
+
+    def makeStudent(self,infoStr):
+        name,idIE,email = infoStr.split("*")
+        return st.Student(name,idIE,email)
+        
+    def getStudent(self,idIE):
+        return(self.students[idIE])
+        
+    def loadStudent(self):
+        infile = open(self.filename,"r")
+        for line in infile:
+            tokens = line.split("*")
+            if(len(tokens)>2):
+                s = self.makeStudent(line)
+                self.loadStudent(s.idIE,s)
+            else:
+                s.setGrade(tokens[0],tokens[1])
+                
+        infile.close()
+        
+    def getStudents(self):
+        return self.students
+-------------------------------------------------------------------------------
+
+import studentmanager as sm
+
+
+class controller:
+    
+    def __init__(self, sm):
+        self.sm = sm
+        
+    def averageStudent(self,idIE):
+        s = self.sm.getStudent(idIE)
+        grades = s.getGrades()
+        total = 0
+        for grade in grades:
+            total+=float(grades[grade])
+        return total/len(grades)
+        
+    def averageCourse(self,course):
+        st = self.sm.getStudents()
+        total = 0
+        index = 0
+        for student in st:
+            s = st[student]
+            grades = s.getGrades()
+            if course in grades:
+                total += float(grades[course])
+                index += 1
+        result = total(index)
+        if index == 0:
+            result = -1
+        return result
+        
+    def averageAll(self):
+        st = self.sm.getStudents()
+        total = 0
+        for student in st:
+            s = st[student]
+            idIE = s.getID()
+            total += self.averageStudent(idIE)
+        return total/len(st)
+-------------------------------------------------------------------------------
+class Student(object):
+    def __init__(self,name,idIE,grades,email):
+        self.name = name
+        self.__idIE = idIE
+        self.__grades = {}
+        self.email = email
+        
+    def getname(self):
+        return self.name
+        
+    def getgrade(self):
+        return self.__grades
+        
+    def getemail(self):
+        return self.email
+        
+    def getgrade(self,course):
+        return self.__grades[course]
+
+    def getid(self):
+        return self.__idIE
+
+    def setgrade(self,course,grade):
+        self.__grades[course] = grade
+
+    def setname(self,newname):
+        self.name = newname
+-------------------------------------------------------------------------------
+# use tkinter for web interface #
+import studentclass as cl
+import studentmanager as sm
+import studentcontroller as sc
+
+class view:
+    
+    def __init__(self,controller):
+        self.controller = controller
+        
+    def mainloop(self):
+        """
+    Student Management Systerm
+     
+                  0-Quit
+                  1-Average frade for one student
+                  2-Average of the average grade of all students
+                  3-Average grade for one course
+"""
+
+    choice = input("Well, what will it be?: ")
+    print()
+
+    # exit
+    if choice == "0":
+        print("Good-bye.")
+        
+    elif choice == "1":
+        option = input("What student do you want me to look-up?: ")
+        if option.lower() in sm:
+            average = option[sm.lower()]
+            average = sm.averageStudent
+            print("\n", average)
+        else:
+            print("\nSorry, no matches")
+            
+    elif choice == "2":
+            print("\n", sc.averageAll()) #not working :/
+            
+    elif choice == "3":
+            option = input("What class do you want me to look-up?: ")
+            if option.lower() in cl:
+                average = option[cl.lower()]
+                average = 
+
+  #  elif choice == "3":
+   #     option = input("Which course? : ")
+    #    if option.lower() in cl:
+     #       average = option[sm.lower()]
+
+-------------------------------------------------------------------------------
+f = open("/users/jordansorensen/anaconda3/PythonAssignment/StudentFile-2.txt","r")
+
+#recall = ""
+#dir = {}
+#for i in f:
+#    line = i.partition('*')
+#    if "," in line[0]:
+#        name = line[0]
+#        temp = line[2].partition("*")
+#        student_id = temp[0]
+#        email=temp[2].rstrip("\n")
+#        dir[student_id] = [name,email,student_id]
+#        recall = student_id
+#        dir[student_id].append({"classes":{}})
+#    else:
+#        course = line[0]
+#       grade = line[2].rstrip("\n")
+#        dir[recall][3]["classes"][course] = grade
